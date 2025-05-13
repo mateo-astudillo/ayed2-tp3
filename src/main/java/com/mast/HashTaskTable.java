@@ -3,6 +3,8 @@ package com.mast;
 import java.util.Optional;
 import java.util.UUID;
 
+import com.sun.tools.javac.main.Option;
+
 /**
  * HashTaskTable
  */
@@ -37,6 +39,12 @@ public class HashTaskTable {
 		this.N += 1;
 		setLoadFactor();
 		return true;
+	}
+
+	public boolean delete(UUID key) {
+		Optional<Task> task = find(key);
+		task.ifPresent(t -> t.setRemoved());
+		return task.isPresent();
 	}
 
 	public Optional<Task> find(UUID key) {

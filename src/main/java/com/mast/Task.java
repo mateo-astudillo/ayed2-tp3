@@ -9,13 +9,14 @@ import java.util.UUID;
  */
 public class Task {
 	private final UUID uuid;
-	// private boolean removed; // atributo de contenedor
+	@SuppressWarnings("unused")
+	private boolean removed = false;
 	private String name;
+
 	private String description;
 	private State state; // pendiente - en progrso - finalizada - cancelada
 	private final LocalDate createdAt;
 	private Optional<LocalDate> finishedAt;
-
 	{ // Código compartido entre constructores
 		this.uuid = UUID.randomUUID();
 		// this.removed = false;
@@ -32,6 +33,10 @@ public class Task {
 	public Task(String name, String description) {
 		this.name = name;
 		this.description = description;
+	}
+
+	public void setRemoved() {
+		this.removed = true;
 	}
 
 	public void changeState(State newState) {
